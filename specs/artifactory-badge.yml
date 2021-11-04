@@ -1,0 +1,114 @@
+openapi: 3.0.1
+info:
+  title: artifactory-badge
+  version: 0.5.0
+servers:
+- url: http://localhost:8080
+  description: The server where the application is hosted. Defaulted to localhost
+paths:
+  /docker/pulls:
+    get:
+      operationId: getImagePullCount
+      parameters:
+      - name: package
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: label
+        in: query
+        required: true
+        schema:
+          type: string
+          default: docker pulls
+      responses:
+        default:
+          description: getImagePullCount default response
+          content:
+            image/svg+xml;charset=utf-8:
+              schema:
+                type: string
+  /docker/image-size:
+    get:
+      operationId: getImageSize
+      parameters:
+      - name: package
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: tag
+        in: query
+        required: true
+        schema:
+          type: string
+          default: latest
+      - name: label
+        in: query
+        required: true
+        schema:
+          type: string
+          default: image size
+      responses:
+        default:
+          description: getImageSize default response
+          content:
+            image/svg+xml;charset=utf-8:
+              schema:
+                type: string
+  /docker/layers:
+    get:
+      operationId: getImageLayers
+      parameters:
+      - name: package
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: tag
+        in: query
+        required: true
+        schema:
+          type: string
+          default: latest
+      - name: label
+        in: query
+        required: true
+        schema:
+          type: string
+          default: layers
+      responses:
+        default:
+          description: getImageLayers default response
+          content:
+            image/svg+xml;charset=utf-8:
+              schema:
+                type: string
+  /version:
+    get:
+      operationId: getLatestVersion
+      parameters:
+      - name: package
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: label
+        in: query
+        required: true
+        schema:
+          type: string
+          default: version
+      - name: sort
+        in: query
+        required: true
+        schema:
+          type: string
+          default: date
+      responses:
+        default:
+          description: getLatestVersion default response
+          content:
+            image/svg+xml;charset=utf-8:
+              schema:
+                type: string

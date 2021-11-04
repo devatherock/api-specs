@@ -1,0 +1,62 @@
+orbs:
+  heroku: circleci/heroku@1.2.6
+  
+work_directory: &work_directory
+  working_directory: ~/api-specs
+
+resource_class: &resource_class
+  resource_class: small
+
+version: 2.1
+jobs:
+  deploy:
+    executor: heroku/default
+    <<: *resource_class
+    <<: *work_directory
+    steps:
+      - checkout
+      - heroku/install
+      - setup_remote_docker
+      - attach_workspace:
+          at: ~/api-specs
+      - run:
+          name: Push the docker image to registry.heroku.com
+          command: |
+            TAG=2.4.1-1
+            docker pull devatherock/nexmo-oas-renderer:$TAG
+            docker tag devatherock/nexmo-oas-renderer:$TAG registry.heroku.com/openapi-viewer/web
+            heroku container:login
+            docker push registry.heroku.com/openapi-viewer/web
+            heroku container:release -a openapi-viewer web
+            
+  notify:
+    docker:
+      - image: devatherock/simple-slack:0.7.0
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
+    <<: *resource_class
+    environment:
+      TEXT: "Success: {{.CircleBuildUrl}} by {{.CircleUsername}}"
+      CHANNEL: general
+      TITLE: "Build completed"
+    steps:
+      - run: /bin/simpleslack -c "#33ad7f"
+
+workflows:
+  version: 2.1
+  build_deploy:
+    jobs:
+      - deploy:
+          context:
+            - docker-credentials
+            - heroku-credentials
+          filters:
+            branches:
+              only: master
+      - notify:
+          context:
+            - docker-credentials
+            - slack-webhook
+          requires:
+            - deploy

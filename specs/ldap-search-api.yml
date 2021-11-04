@@ -1,0 +1,33 @@
+openapi: 3.0.1
+info:
+  title: ldap-search-api
+  version: 0.1.0
+servers:
+- url: http://localhost:8080
+  description: The server where the application is hosted. Defaulted to localhost
+paths:
+  /search:
+    get:
+      operationId: search
+      parameters:
+      - name: base_dn
+        in: query
+        required: false
+        schema:
+          type: string
+          nullable: true
+      - name: filter
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: search 200 response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
