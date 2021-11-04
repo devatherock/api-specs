@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Push the docker image to registry.heroku.com
           command: |
-            TAG=2.4.1-1
+            TAG=2.4.1-2
             docker pull devatherock/nexmo-oas-renderer:$TAG
             docker tag devatherock/nexmo-oas-renderer:$TAG registry.heroku.com/openapi-viewer/web
             heroku container:login
