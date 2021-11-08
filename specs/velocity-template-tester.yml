@@ -1,0 +1,32 @@
+openapi: 3.0.1
+info:
+  title: Velocity Template Tester
+  description: Velocity Template Tester API
+  contact:
+    name: devatherock
+    url: https://github.com/devatherock
+  version: 0.6.1
+servers:
+- url: https://velocity-template-tester.herokuapp.com
+  description: The server where the application is hosted
+paths:
+  /api/expandTemplate:
+    post:
+      operationId: expandJsonTemplate
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+          application/x-yaml:
+            schema:
+              type: string
+        required: true
+      responses:
+        default:
+          description: expandJsonTemplate default response
+          content:
+            text/plain:
+              schema:
+                type: string

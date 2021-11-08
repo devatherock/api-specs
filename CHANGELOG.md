@@ -1,5 +1,9 @@
 # Changelog
 
+## 2021-11-08
+### Added
+- API specs for [velocity-template-tester](https://velocity-template-tester.herokuapp.com)
+
 ## 2021-11-04
 ### Changed
 - Used 2.4.1-2 version of nexmo-oas-renderer
