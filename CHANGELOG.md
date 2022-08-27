@@ -1,8 +1,12 @@
 # Changelog
 
+## 2022-08-27
+### Changed
+- CI pipeline to deploy to render
+
 ## 2021-11-08
 ### Added
-- API specs for [velocity-template-tester](https://velocity-template-tester.herokuapp.com)
+- API specs for [velocity-template-tester](https://velocity-template-tester.onrender.com)
 
 ## 2021-11-04
 ### Changed
