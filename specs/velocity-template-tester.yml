@@ -5,16 +5,18 @@ info:
   contact:
     name: devatherock
     url: https://github.com/devatherock
-  version: 0.6.1
+  version: 1.2.0
 servers:
-- url: https://velocity-template-tester.herokuapp.com
+- url: https://velocity-template-tester.onrender.com
   description: The server where the application is hosted
 paths:
   /api/expandTemplate:
     post:
+      summary: Handles a JSON request payload
+      description: Handles a JSON request payload
       operationId: expandJsonTemplate
-      parameters: []
       requestBody:
+        description: ""
         content:
           application/json:
             schema:
@@ -24,9 +26,14 @@ paths:
               type: string
         required: true
       responses:
-        default:
-          description: expandJsonTemplate default response
+        "200":
+          description: response
           content:
             text/plain:
               schema:
                 type: string
+                description: Handles a JSON request payload
+            text/html:
+              schema:
+                type: string
+                description: Handles a JSON request payload

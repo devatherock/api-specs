@@ -1,0 +1,1 @@
+FROM devatherock/nexmo-oas-renderer:2.4.1-2

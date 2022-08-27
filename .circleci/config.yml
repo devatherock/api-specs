@@ -1,33 +1,28 @@
-orbs:
-  heroku: circleci/heroku@1.2.6
-  
 work_directory: &work_directory
   working_directory: ~/api-specs
 
 resource_class: &resource_class
   resource_class: small
+  
+executors:
+  docker-executor:
+    docker:
+      - image: cimg/go:1.14
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
+    <<: *resource_class
+    <<: *work_directory  
 
 version: 2.1
 jobs:
   deploy:
-    executor: heroku/default
-    <<: *resource_class
-    <<: *work_directory
+    executor: docker-executor
     steps:
-      - checkout
-      - heroku/install
-      - setup_remote_docker
-      - attach_workspace:
-          at: ~/api-specs
       - run:
-          name: Push the docker image to registry.heroku.com
+          name: Trigger deployment to render.com
           command: |
-            TAG=2.4.1-2
-            docker pull devatherock/nexmo-oas-renderer:$TAG
-            docker tag devatherock/nexmo-oas-renderer:$TAG registry.heroku.com/openapi-viewer/web
-            heroku container:login
-            docker push registry.heroku.com/openapi-viewer/web
-            heroku container:release -a openapi-viewer web
+            curl $RENDER_DEPLOY_HOOK
             
   notify:
     docker:
@@ -50,7 +45,6 @@ workflows:
       - deploy:
           context:
             - docker-credentials
-            - heroku-credentials
           filters:
             branches:
               only: master
