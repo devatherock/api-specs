@@ -1,0 +1,94 @@
+openapi: 3.0.1
+info:
+  title: Email Sender
+  description: REST API to send emails
+  contact:
+    name: devatherock
+    url: https://github.com/devatherock
+  license:
+    name: MIT
+  version: 0.1.2
+servers:
+  - url: https://smtp-email-sender-api.herokuapp.com
+    description: Generated server url
+paths:
+  /email/v1:
+    post:
+      tags:
+        - email
+      description: Sends an email accepting a JSON or YAML request
+      operationId: sendEmail
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailSendRequest'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/EmailSendRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailSendResponse'
+components:
+  schemas:
+    Contact:
+      required:
+        - email
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the recipient. Optional
+          example: Test.User
+        email:
+          type: string
+          description: The email address of the recipient. Required
+          example: test@test.com
+      description: List of bcc addresses
+    EmailSendRequest:
+      type: object
+      properties:
+        from:
+          $ref: '#/components/schemas/Contact'
+        to:
+          type: array
+          description: List of to addresses
+          items:
+            $ref: '#/components/schemas/Contact'
+        cc:
+          type: array
+          description: List of cc addresses
+          items:
+            $ref: '#/components/schemas/Contact'
+        bcc:
+          type: array
+          description: List of bcc addresses
+          items:
+            $ref: '#/components/schemas/Contact'
+        subject:
+          type: string
+          description: Subject of the email
+          example: Test email subject
+        text:
+          type: string
+          description: Plain text content of the email
+          example: Test email content
+        html:
+          type: string
+          description: Html content of the email
+          example: <html><body>Test email content</body></html>
+        recipientSpecified:
+          type: boolean
+          readOnly: true
+    EmailSendResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique id for the email request
+          example: <267555284.3.1592156660480.JavaMail.abc@localhost>
