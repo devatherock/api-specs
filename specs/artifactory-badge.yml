@@ -1,114 +1,175 @@
 openapi: 3.0.1
 info:
   title: artifactory-badge
-  version: 0.5.0
+  version: v1
 servers:
 - url: http://localhost:8080
   description: The server where the application is hosted. Defaulted to localhost
 paths:
-  /docker/pulls:
-    get:
-      operationId: getImagePullCount
-      parameters:
-      - name: package
-        in: query
-        required: true
-        schema:
-          type: string
-      - name: label
-        in: query
-        required: true
-        schema:
-          type: string
-          default: docker pulls
-      responses:
-        default:
-          description: getImagePullCount default response
-          content:
-            image/svg+xml;charset=utf-8:
-              schema:
-                type: string
   /docker/image-size:
     get:
+      summary: Generates the image size badge
+      description: Generates the image size badge
       operationId: getImageSize
       parameters:
       - name: package
         in: query
+        description: The full path to the docker image within the artifactory docker
+          registry
         required: true
         schema:
           type: string
+        example: docker/devatherock/drone-yaml-validator
       - name: tag
         in: query
+        description: The docker image tag for which to generate the badge
         required: true
         schema:
           type: string
           default: latest
       - name: label
         in: query
+        description: The label to use in the generated badge
         required: true
         schema:
           type: string
           default: image size
       responses:
-        default:
-          description: getImageSize default response
+        "200":
+          description: An XML representing the SVG image size badge
           content:
-            image/svg+xml;charset=utf-8:
+            image/svg+xml; charset=utf-8:
               schema:
                 type: string
-  /docker/layers:
+  /docker/image_size:
     get:
-      operationId: getImageLayers
+      summary: Generates the image size badge
+      description: Generates the image size badge
+      operationId: getImageSize_1
       parameters:
       - name: package
         in: query
+        description: The full path to the docker image within the artifactory docker
+          registry
         required: true
         schema:
           type: string
+        example: docker/devatherock/drone-yaml-validator
       - name: tag
         in: query
+        description: The docker image tag for which to generate the badge
         required: true
         schema:
           type: string
           default: latest
       - name: label
         in: query
+        description: The label to use in the generated badge
+        required: true
+        schema:
+          type: string
+          default: image size
+      responses:
+        "200":
+          description: An XML representing the SVG image size badge
+          content:
+            image/svg+xml; charset=utf-8:
+              schema:
+                type: string
+  /docker/layers:
+    get:
+      summary: Generates the layers badge
+      description: Generates the layers badge
+      operationId: getImageLayers
+      parameters:
+      - name: packageName
+        in: query
+        description: The full path to the docker image within the artifactory docker
+          registry
+        required: true
+        schema:
+          type: string
+        example: docker/devatherock/drone-yaml-validator
+      - name: tag
+        in: query
+        description: The docker image tag for which to generate the badge
+        required: true
+        schema:
+          type: string
+        example: 1.0.0
+      - name: label
+        in: query
+        description: The label to use in the generated badge
         required: true
         schema:
           type: string
           default: layers
       responses:
-        default:
-          description: getImageLayers default response
+        "200":
+          description: An XML representing the SVG layers badge
           content:
-            image/svg+xml;charset=utf-8:
+            image/svg+xml; charset=utf-8:
+              schema:
+                type: string
+  /docker/pulls:
+    get:
+      summary: Generates the docker pulls badge
+      description: Generates the docker pulls badge
+      operationId: getImagePullCount
+      parameters:
+      - name: package
+        in: query
+        description: The full path to the docker image within the artifactory docker
+          registry
+        required: true
+        schema:
+          type: string
+        example: docker/devatherock/drone-yaml-validator
+      - name: label
+        in: query
+        description: The label to use in the generated badge
+        required: true
+        schema:
+          type: string
+          default: docker pulls
+      responses:
+        "200":
+          description: An XML representing the SVG docker pulls badge
+          content:
+            image/svg+xml; charset=utf-8:
               schema:
                 type: string
   /version:
     get:
+      description: Generates the version badge
       operationId: getLatestVersion
       parameters:
       - name: package
         in: query
+        description: The full path to the docker image within the artifactory docker
+          registry
         required: true
         schema:
           type: string
+        example: docker/devatherock/drone-yaml-validator
       - name: label
         in: query
+        description: The label to use in the generated badge
         required: true
         schema:
           type: string
           default: version
       - name: sort
         in: query
+        description: The attribute based on which to determine the latest version
         required: true
         schema:
           type: string
           default: date
       responses:
-        default:
-          description: getLatestVersion default response
+        "200":
+          description: An XML representing the SVG version badge
           content:
-            image/svg+xml;charset=utf-8:
+            image/svg+xml; charset=utf-8:
               schema:
                 type: string
