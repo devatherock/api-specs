@@ -8,7 +8,7 @@ servers:
 paths:
   /docker/image-size:
     get:
-      summary: Generates the image size badge
+      summary: getImageSize
       description: Generates the image size badge
       operationId: getImageSize
       parameters:
@@ -43,7 +43,7 @@ paths:
                 type: string
   /docker/image_size:
     get:
-      summary: Generates the image size badge
+      summary: getImageSize
       description: Generates the image size badge
       operationId: getImageSize_1
       parameters:
@@ -78,11 +78,11 @@ paths:
                 type: string
   /docker/layers:
     get:
-      summary: Generates the layers badge
+      summary: getImageLayers
       description: Generates the layers badge
       operationId: getImageLayers
       parameters:
-      - name: packageName
+      - name: package
         in: query
         description: The full path to the docker image within the artifactory docker
           registry
@@ -96,7 +96,7 @@ paths:
         required: true
         schema:
           type: string
-        example: 1.0.0
+          default: latest
       - name: label
         in: query
         description: The label to use in the generated badge
@@ -113,7 +113,7 @@ paths:
                 type: string
   /docker/pulls:
     get:
-      summary: Generates the docker pulls badge
+      summary: getImagePullCount
       description: Generates the docker pulls badge
       operationId: getImagePullCount
       parameters:
@@ -141,6 +141,7 @@ paths:
                 type: string
   /version:
     get:
+      summary: getLatestVersion
       description: Generates the version badge
       operationId: getLatestVersion
       parameters:

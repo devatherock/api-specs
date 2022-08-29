@@ -12,28 +12,42 @@ servers:
 paths:
   /api/expandTemplate:
     post:
-      summary: Handles a JSON request payload
-      description: Handles a JSON request payload
+      summary: expandJsonTemplate
+      description: Accepts a JSON request and expands the supplied Velocity template
       operationId: expandJsonTemplate
       requestBody:
         description: ""
         content:
           application/json:
             schema:
-              type: string
+              $ref: '#/components/schemas/ExpandTemplateRequest'
           application/x-yaml:
             schema:
               type: string
         required: true
       responses:
         "200":
-          description: response
+          description: the expanded template string/html
           content:
             text/plain:
               schema:
                 type: string
-                description: Handles a JSON request payload
             text/html:
               schema:
                 type: string
-                description: Handles a JSON request payload
+components:
+  schemas:
+    ExpandTemplateRequest:
+      required:
+      - template
+      type: object
+      properties:
+        template:
+          type: string
+          description: The Velocity template to expand
+        parameters:
+          type: object
+          additionalProperties: true
+          description: Parameters to use to expand the template
+          nullable: true
+      description: Represents a request to expand a template
