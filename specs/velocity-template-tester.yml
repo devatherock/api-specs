@@ -32,9 +32,11 @@ paths:
             text/plain:
               schema:
                 type: string
+                example: Hello foo
             text/html:
               schema:
                 type: string
+                example: <html>Hello!</html>
 components:
   schemas:
     ExpandTemplateRequest:
@@ -45,6 +47,7 @@ components:
         template:
           type: string
           description: The Velocity template to expand
+          example: "Hello ${user}"
         parameters:
           type: object
           additionalProperties: true
