@@ -9,7 +9,7 @@ info:
     name: MIT
   version: 0.1.2
 servers:
-  - url: https://smtp-email-sender-api.herokuapp.com
+  - url: https://email-sender-44uh.onrender.com
     description: Generated server url
 paths:
   /email/v1:
