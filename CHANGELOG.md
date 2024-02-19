@@ -1,5 +1,9 @@
 # Changelog
 
+## 2024-02-19
+### Changed
+- Used `swagger-ui` instead of `nexmo-oas-renderer`
+
 ## 2022-08-27
 ### Changed
 - CI pipeline to deploy to render

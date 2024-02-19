@@ -1,1 +1,1 @@
-FROM devatherock/nexmo-oas-renderer:2.4.1-2
+FROM swaggerapi/swagger-ui:v5.11.6

@@ -1,0 +1,9 @@
+urls:
+  - name: artifactory-badge
+    url: https://raw.githubusercontent.com/devatherock/api-specs/master/specs/artifactory-badge.yml
+  - name: email-sender
+    url: https://raw.githubusercontent.com/devatherock/api-specs/master/specs/email-sender.yml
+  - name: ldap-search-api
+    url: https://raw.githubusercontent.com/devatherock/api-specs/master/specs/ldap-search-api.yml
+  - name: velocity-template-tester
+    url: https://raw.githubusercontent.com/devatherock/api-specs/master/specs/velocity-template-tester.yml  
