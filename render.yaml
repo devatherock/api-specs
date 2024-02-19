@@ -7,7 +7,5 @@ services:
     dockerfilePath: ./render/Dockerfile
     dockerContext: ./render
     envVars:
-      - key: OAS_GIT_PATH
-        value: https://github.com/devatherock/api-specs.git
-      - key: OAS_PATH
-        value: /definitions/api-specs/specs
+      - key: CONFIG_URL
+        value: https://raw.githubusercontent.com/devatherock/api-specs/master/render/swagger-config.yml
